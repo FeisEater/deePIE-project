@@ -105,3 +105,10 @@ venv.bak/
 
 # Training dataset
 train/
+
+# MNIST dataloader creates this directory
+data/
+
+#PROJECT specific:
+logs/*
+checkpoints/*

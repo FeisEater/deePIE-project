@@ -38,6 +38,7 @@ if __name__ == "__main__":
     plt.xlabel('Epochs')
     plt.ylabel('Loss')
     plt.legend()
+    plt.grid()
     plt.show()
     
     plt.plot(np.arange(startEpoch,endEpoch+1), train_score, label='Training F1 score')
@@ -46,4 +47,5 @@ if __name__ == "__main__":
     plt.xlabel('Epochs')
     plt.ylabel('F1 score')
     plt.legend()
+    plt.grid()
     plt.show()

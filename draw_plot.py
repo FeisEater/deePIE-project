@@ -8,13 +8,18 @@ if __name__ == "__main__":
     train_score = [0]
     valid_score = [0]
     lastEpoch = -1
+    separators = []
     for idx,filename in enumerate(sys.argv):
         if idx == 0:
             continue
         with open(filename, 'r') as file:
+            firstLine = True
             for line in file:
                 tokens = line.split()
                 epoch = int(tokens[0])
+                if firstLine:
+                    separators.append(epoch)
+                    firstLine = False
                 train_loss = float(tokens[1])
                 train_f1 = float(tokens[2])
                 valid_loss = float(tokens[3])
@@ -34,6 +39,8 @@ if __name__ == "__main__":
     endEpoch = lastEpoch
     plt.plot(np.arange(startEpoch,endEpoch+1), train_losses, label='Training loss')
     plt.plot(np.arange(startEpoch,endEpoch+1), valid_losses, label='Validation loss')
+    for s in separators:
+        plt.axvline(x=s, color="black")
     plt.title('Losses')
     plt.xlabel('Epochs')
     plt.ylabel('Loss')
@@ -42,6 +49,8 @@ if __name__ == "__main__":
     
     plt.plot(np.arange(startEpoch,endEpoch+1), train_score, label='Training F1 score')
     plt.plot(np.arange(startEpoch,endEpoch+1), valid_score, label='Validation F1 score')
+    for s in separators:
+        plt.axvline(x=s, color="black")
     plt.title('F1 score')
     plt.xlabel('Epochs')
     plt.ylabel('F1 score')
